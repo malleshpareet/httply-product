@@ -43,6 +43,9 @@ export default function Hero() {
             href="#download"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md text-[15px] font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-500/20"
           >
+            <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.951-1.801"/>
+            </svg>
             Download for Windows — Free
           </a>
           <a
