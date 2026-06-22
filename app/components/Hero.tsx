@@ -46,7 +46,7 @@ export default function Hero() {
             Download for Windows — Free
           </a>
           <a
-            href="https://httply.qzz.io"
+            href={process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io"}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-md text-[15px] font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-500/20"
@@ -54,6 +54,7 @@ export default function Hero() {
             Try in browser
           </a>
         </div>
+
 
         {/* Minimal stats */}
         <div className="flex items-center justify-center gap-10 mt-14 opacity-80">

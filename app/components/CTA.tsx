@@ -24,7 +24,7 @@ export default function CTA() {
                 Download Free
               </a>
               <a
-                href="https://httply.qzz.io"
+                href={process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io"}
                 target="_blank"
                 rel="noopener noreferrer"
                 id="cta-webapp-btn"

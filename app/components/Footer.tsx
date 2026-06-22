@@ -21,7 +21,7 @@ export default function Footer() {
             <h5 className="text-sm font-semibold text-white mb-4">Product</h5>
             <div className="flex flex-col gap-2">
               {[
-                { label: "Web App", href: "https://httply.qzz.io" },
+                { label: "Web App", href: process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io" },
                 { label: "Download", href: "#download" },
                 { label: "Features", href: "#features" },
                 { label: "Changelog", href: "/changelog" },
@@ -71,7 +71,7 @@ export default function Footer() {
             © 2025 Httply — Modern API Testing Platform for Developers and Teams
           </p>
           <a
-            href="https://httply.qzz.io"
+            href={process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io"}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-zinc-500 hover:text-white transition-colors"

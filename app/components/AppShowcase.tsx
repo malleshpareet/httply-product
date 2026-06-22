@@ -77,11 +77,10 @@ export default function AppShowcase() {
             {/* Screenshot */}
             <Image
               src="/image.png"
-              alt="Httply — API & WebSocket testing workspace"
-              width={1400}
-              height={900}
-              className="w-full h-auto block"
-              priority
+              alt="Httply workspace interface managing API collections, environments, and testing workflows"
+              width={1200}
+              height={800}
+              className="w-full h-auto object-cover object-top opacity-90 transition-opacity duration-500 group-hover:opacity-100"
             />
 
           </div>

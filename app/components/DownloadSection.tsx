@@ -48,7 +48,7 @@ const platforms: {
       name: "Web App",
       desc: "No installation required",
       downloads: [
-        { label: "Open in Browser", href: "https://httply.qzz.io", primary: true, id: "web-app-btn" },
+        { label: "Open in Browser", href: process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io", primary: true, id: "web-app-btn" },
       ],
       features: ["Always up-to-date", "No install needed", "Works everywhere"],
     },

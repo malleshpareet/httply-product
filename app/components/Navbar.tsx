@@ -14,7 +14,7 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { href: "https://httply.qzz.io", label: "Web App", external: true },
+    { href: process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io", label: "Web App", external: true },
     { href: "/#features", label: "Features" },
     { href: "/#download", label: "Download" },
     { href: "/#docs", label: "Docs" },
@@ -69,7 +69,7 @@ export default function Navbar() {
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="https://httply.qzz.io/login"
+            href={process.env.NEXT_PUBLIC_WEB_APP_URL ? `${process.env.NEXT_PUBLIC_WEB_APP_URL}/login` : "https://httply.qzz.io/login"}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-medium text-zinc-300 hover:text-white transition-colors"
