@@ -68,7 +68,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-zinc-600 text-center sm:text-left">
-            © 2025 Httply — Modern API Testing Platform for Developers and Teams
+            © 2026 Httply — Modern API Testing Platform for Developers and Teams
           </p>
           <a
             href={process.env.NEXT_PUBLIC_WEB_APP_URL || "https://httply.qzz.io"}
