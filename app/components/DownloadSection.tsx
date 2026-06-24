@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Download as DownloadIcon, Terminal } from "lucide-react";
 
 type Download =
@@ -31,16 +32,23 @@ const platforms: {
       id: "mac",
       name: "macOS",
       desc: "macOS 12 Monterey or later",
-      comingSoon: true,
-      downloads: [],
+      comingSoon: false,
+      downloads: [
+        { label: "Download .dmg", file: "/Httply_0.1.0_aarch64.dmg", size: "4.1 MB", primary: true, id: "mac-dmg-btn" },
+        { label: "Download .app", file: "/Httply_aarch64.app.tar.gz", size: "3.3 MB", primary: false, id: "mac-app-btn" },
+      ],
       features: ["Apple Silicon support", "Native performance", "Retina ready"],
     },
     {
       id: "linux",
       name: "Linux",
       desc: "Ubuntu 20.04+, Debian, Fedora",
-      comingSoon: true,
-      downloads: [],
+      comingSoon: false,
+      downloads: [
+        { label: "Download .AppImage", file: "/Httply_0.1.0_amd64.AppImage", size: "76.8 MB", primary: true, id: "linux-appimage-btn" },
+        { label: "Download .deb", file: "/Httply_0.1.0_amd64.deb", size: "2.8 MB", primary: false, id: "linux-deb-btn" },
+        { label: "Download .rpm", file: "/Httply-0.1.0-1.x86_64.rpm", size: "2.8 MB", primary: false, id: "linux-rpm-btn" },
+      ],
       features: [".deb & .rpm packages", "AppImage support", "CLI install"],
     },
     {
@@ -80,6 +88,21 @@ const platformIcons: Record<string, React.ReactNode> = {
 };
 
 export default function DownloadSection() {
+  const [os, setOs] = useState<"windows" | "mac" | "linux" | "unknown">("windows");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    if (userAgent.indexOf("mac") !== -1) {
+      setOs("mac");
+    } else if (userAgent.indexOf("linux") !== -1 || userAgent.indexOf("x11") !== -1) {
+      setOs("linux");
+    } else {
+      setOs("windows");
+    }
+  }, []);
+
   return (
     <section id="download" className="py-28 relative">
       <div className="absolute inset-0 grid-bg opacity-30" />
@@ -107,18 +130,21 @@ export default function DownloadSection() {
 
         {/* Platform cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {platforms.map((platform) => (
+          {platforms.map((platform) => {
+            const isFeatured = mounted ? platform.id === os : platform.id === "windows";
+
+            return (
             <div
               key={platform.id}
               id={`${platform.id}-card`}
-              className={`relative rounded-2xl p-6 flex flex-col gap-4 transition-all duration-200 ${platform.featured
-                  ? "glass border border-indigo-500/30 shadow-xl shadow-indigo-500/10 hover:shadow-indigo-500/20"
-                  : "glass border border-white/[0.06] hover:border-white/[0.12]"
+              className={`relative rounded-2xl p-6 flex flex-col gap-4 transition-all duration-200 ${isFeatured
+                ? "glass border border-indigo-500/30 shadow-xl shadow-indigo-500/10 hover:shadow-indigo-500/20"
+                : "glass border border-white/[0.06] hover:border-white/[0.12]"
                 } ${platform.comingSoon ? "opacity-60" : ""}`}
             >
-              {platform.badge && (
+              {isFeatured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-indigo-600 text-white text-xs font-semibold shadow-lg shadow-indigo-500/30">
-                  {platform.badge}
+                  Recommended
                 </div>
               )}
               {platform.comingSoon && (
@@ -129,7 +155,7 @@ export default function DownloadSection() {
                 </div>
               )}
 
-              <div className={`p-2.5 rounded-xl w-fit ${platform.featured ? "bg-indigo-500/10 text-indigo-400" : "bg-white/5 text-zinc-400"}`}>
+              <div className={`p-2.5 rounded-xl w-fit ${isFeatured ? "bg-indigo-500/10 text-indigo-400" : "bg-white/5 text-zinc-400"}`}>
                 {platformIcons[platform.id]}
               </div>
 
@@ -138,7 +164,10 @@ export default function DownloadSection() {
                 <p className="text-sm text-zinc-500">{platform.desc}</p>
               </div>
 
-              <div className="flex flex-col gap-2 flex-1 justify-end">
+              {/* Spacer to push buttons and features to the bottom evenly */}
+              <div className="flex-1" />
+
+              <div className="flex flex-col gap-2 mt-4">
                 {platform.comingSoon ? (
                   <button
                     disabled
@@ -155,22 +184,26 @@ export default function DownloadSection() {
                       download={"file" in dl ? true : undefined}
                       target={"href" in dl ? "_blank" : undefined}
                       rel={"href" in dl ? "noopener noreferrer" : undefined}
-                      className={`flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${dl.primary
-                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20"
-                          : "glass glass-hover text-zinc-300"
+                      className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${dl.primary
+                        ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20"
+                        : "glass glass-hover text-zinc-300"
                         }`}
                     >
-                      <span className="flex items-center gap-2">
-                        <DownloadIcon className="w-4 h-4" />
-                        {dl.label}
+                      <span className="flex items-center gap-2 whitespace-nowrap min-w-0">
+                        {dl.id === "web-app-btn" ? (
+                          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        ) : (
+                          <DownloadIcon className="w-4 h-4 shrink-0" />
+                        )}
+                        <span className="truncate">{dl.label.replace('Download ', '')}</span>
                       </span>
-                      {"size" in dl && <span className="text-xs opacity-60">{dl.size}</span>}
+                      {"size" in dl && <span className="text-xs font-mono opacity-70 shrink-0 ml-2">{dl.size}</span>}
                     </a>
                   ))
                 )}
               </div>
 
-              <ul className="flex flex-col gap-1 pt-2 border-t border-white/[0.05]">
+              <ul className="flex flex-col gap-1.5 pt-4 mt-2 border-t border-white/[0.08]">
                 {platform.features.map((f) => (
                   <li key={f} className="text-xs text-zinc-500 flex items-center gap-1.5">
                     <span className="text-indigo-400">✓</span>
@@ -179,7 +212,8 @@ export default function DownloadSection() {
                 ))}
               </ul>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
