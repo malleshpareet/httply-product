@@ -7,8 +7,8 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 export const metadata: Metadata = {
   title: {
-    default: "Httply | The Ultimate API & WebSocket Testing Platform",
-    template: "%s | Httply"
+    default: "Httply - API Client | The Ultimate API & WebSocket Testing Platform",
+    template: "%s | Httply - API Client"
   },
   description: "Download Httply — the modern, open-source Postman alternative to test REST APIs, debug WebSocket connections, manage collections, and collaborate with your team. Available for Windows, macOS, Linux, and Web.",
   keywords: [
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "Open Source API Testing", "Httply", "WebSocket Client", "REST Client"
   ],
   authors: [{ name: "Httply Team" }],
-  creator: "Httply",
-  publisher: "Httply",
+  creator: "Httply - API Client",
+  publisher: "Httply - API Client",
   formatDetection: {
     email: false,
     address: false,
@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Httply | The Ultimate API & WebSocket Testing Platform",
-    description: "Download Httply to start testing, managing, and collaborating on APIs faster. The perfect Postman alternative.",
+    title: "Httply - API Client | The Ultimate API & WebSocket Testing Platform",
+    description: "Download Httply - API Client to start testing, managing, and collaborating on APIs faster. The perfect Postman alternative.",
     url: "/",
-    siteName: "Httply",
+    siteName: "Httply - API Client",
     images: [
       {
         url: "/og-image.png", // Assuming we have or will add a standard og-image
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Httply | API Testing Made Simple",
+    title: "Httply - API Client | API Testing Made Simple",
     description: "Test REST APIs, debug WebSockets, and collaborate with your team. Try the modern Postman alternative today.",
     images: ["/og-image.png"],
   },
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {
                   "@type": "Organization",
                   "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#organization`,
-                  "name": "Httply",
+                  "name": "Httply - API Client",
                   "url": process.env.NEXT_PUBLIC_SITE_URL,
                   "logo": `${process.env.NEXT_PUBLIC_SITE_URL}/icon.png`,
                   "sameAs": [
@@ -93,7 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "@type": "WebSite",
                   "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#website`,
                   "url": process.env.NEXT_PUBLIC_SITE_URL,
-                  "name": "Httply",
+                  "name": "Httply - API Client",
                   "description": "The Ultimate API & WebSocket Testing Platform",
                   "publisher": {
                     "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#organization`
@@ -101,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
                 {
                   "@type": "SoftwareApplication",
-                  "name": "Httply",
+                  "name": "Httply - API Client",
                   "operatingSystem": "Windows, macOS, Linux, Web",
                   "applicationCategory": "DeveloperApplication",
                   "description": "Modern API Testing Platform. Test REST APIs, debug WebSockets, and collaborate with your team.",
